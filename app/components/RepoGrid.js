@@ -1,5 +1,5 @@
 var React = require("react");
-var PropTypes = require('prop-types');
+var PropTypes = require("prop-types");
 
 function RepoGrid(props) {
   return (
@@ -31,6 +31,6 @@ function RepoGrid(props) {
 
 RepoGrid.propTypes = {
   repos: PropTypes.array.isRequried
-}
+};
 
 module.exports = RepoGrid;
