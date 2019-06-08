@@ -84,7 +84,7 @@ a {
   text-align: center;
   display: block;
   padding: 7px 0;
-  margin: 0;
+  margin: 10px auto;
 }
 
 .button:hover:enabled {
@@ -127,4 +127,17 @@ a {
   text-align: center;
   font-size: 30px;
   font-weight: 200;
+}
+
+.reset {
+  border: none;
+  background: transparent;
+  color: #d0021b;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.reset:hover {
+  cursor: pointer;
 }
