@@ -21,11 +21,13 @@ function Player(props) {
       )}
       {avatar !== null && (
         <PlayerPreview
-          id={id}
           avatar={avatar}
           username={username}
-          onReset={handleReset}
-        />
+        >
+          <button className="reset" onClick={handleReset.bind(null, id)}>
+            Reset
+          </button>
+        </PlayerPreview>
       )}
     </>
   );
