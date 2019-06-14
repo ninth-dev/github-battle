@@ -1,9 +1,9 @@
-var React = require("react");
-var PropTypes = require("prop-types");
-var Link = require("react-router-dom").Link;
-var Player = require("./Player");
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Player } from "./Player";
 
-class Battle extends React.Component {
+export class Battle extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,35 +12,32 @@ class Battle extends React.Component {
       playerOneImage: null,
       playerTwoImage: null
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleReset = this.handleReset.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(id, username) {
-    this.setState(function() {
-      var newState = {};
-      newState[id + "Name"] = username;
-      newState[id + "Image"] =
-        "https://github.com/" + username + ".png?size=200";
-      return newState;
-    });
+  handleSubmit (id, username) {
+    this.setState(() => ({
+      [id + "Name"]: username,
+      [id + "Image"]: `https://github.com/${username}.png?size=200`
+    }));
   }
-
   handleReset(id) {
-    this.setState(function() {
-      var newState = {};
-      newState[id + "Name"] = "";
-      newState[id + "Image"] = null;
-      return newState;
-    });
-  }
+    this.setState(() => ({
+      [id + "Name"]: "",
+      [id + "Image"]: null
+    }));
+  };
 
   render() {
-    var match = this.props.match;
-    var playerOneName = this.state.playerOneName;
-    var playerOneImage = this.state.playerOneImage;
-    var playerTwoName = this.state.playerTwoName;
-    var playerTwoImage = this.state.playerTwoImage;
+    const { match } = this.props;
+
+    const {
+      playerOneName,
+      playerOneImage,
+      playerTwoName,
+      playerTwoImage
+    } = this.state;
 
     return (
       <div>
@@ -66,12 +63,10 @@ class Battle extends React.Component {
           <Link
             className="button"
             to={{
-              pathname: match.url + "/results",
-              search:
-                "?playerOneName=" +
-                encodeURIComponent(playerOneName) +
-                "&playerTwoName=" +
-                encodeURIComponent(playerTwoName)
+              pathname: `${match.url}/results`,
+              search: `?playerOneName=${encodeURIComponent(
+                playerOneName
+              )}&playerTwoName=${encodeURIComponent(playerTwoName)}`
             }}
           >
             Battle
@@ -81,5 +76,3 @@ class Battle extends React.Component {
     );
   }
 }
-
-module.exports = Battle;

@@ -1,7 +1,10 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-require("./index.css");
+import "core-js/stable";
+import "regenerator-runtime/runtime";
+import React from "react";
+import ReactDOM from  "react-dom";
 
-var App = require("./components/App");
+import "./index.css";
+
+import { App } from "./components/App";
 
 ReactDOM.render(<App />, document.getElementById("app"));

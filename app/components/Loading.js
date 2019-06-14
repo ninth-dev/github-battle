@@ -1,14 +1,14 @@
-var React = require("react");
-var PropTypes = require("prop-types");
+import React from "react";
+import PropTypes from "prop-types";
 
-var styles = {
+const styles = {
   content: {
     textAlign: "center",
     fontSize: "35px"
   }
 };
 
-class Loading extends React.Component {
+export class Loading extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,17 +17,17 @@ class Loading extends React.Component {
   }
 
   componentDidMount() {
-    var stopper = this.props.text + "...";
-    this.interval = window.setInterval(function() {
-      this.setState(function(prevState) {
-        return prevState.text === stopper
-          ? { text: this.props.text }
-          : { text: prevState.text + "." };
-      }.bind(this));
-    }.bind(this), this.props.speed);
+    const { text, speed } = this.props;
+    this.interval = window.setInterval(() => {
+      this.setState(prevState =>
+        prevState.text === `${text}...`
+          ? { text }
+          : { text: prevState.text + "." }
+      );
+    }, speed);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.clearInterval(this.interval);
   }
 
@@ -38,12 +38,10 @@ class Loading extends React.Component {
 
 Loading.defaultProps = {
   text: "Loading",
-  speed: 300,
+  speed: 300
 };
 
 Loading.propTypes = {
   text: PropTypes.string.isRequired,
-  speed: PropTypes.number.isRequired,
+  speed: PropTypes.number.isRequired
 };
-
-module.exports = Loading;

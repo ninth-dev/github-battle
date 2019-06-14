@@ -1,36 +1,38 @@
-var React = require("react");
-var PropTypes = require("prop-types");
+import React from "react";
+import PropTypes from "prop-types";
 
-function RepoGrid(props) {
-  return (
-    <ul className="popular-list">
-      {props.repos.map(function(repo, index) {
-        return (
-          <li key={repo.name} className="popular-item">
-            <div className="popular-rank">#{index + 1}</div>
-            <ul className="space-list-items">
+export const RepoGrid = ({ repos }) => (
+  <ul className="popular-list">
+    {repos.map((repo, index) => {
+      const {
+        name,
+        owner,
+        stargazers_count,
+        html_url
+      } = repo;
+      return (
+        <li key={name} className="popular-item">
+          <div className="popular-rank">#{index + 1}</div>
+          <ul className="space-list-items">
+            <li>
+              <img
+                src={owner.avatar_url}
+                alt={"Avatar for " + owner.login}
+                className="avatar"
+              />
               <li>
-                <img
-                  src={repo.owner.avatar_url}
-                  alt={"Avatar for " + repo.owner.login}
-                  className="avatar"
-                />
-                <li>
-                  <a href={repo.html_url}>{repo.name}</a>
-                </li>
-                <li>@{repo.owner.login}</li>
-                <li>{repo.stargazers_count} stars</li>
+                <a href={html_url}>{name}</a>
               </li>
-            </ul>
-          </li>
-        );
-      })}
-    </ul>
-  );
-}
+              <li>@{owner.login}</li>
+              <li>{stargazers_count} stars</li>
+            </li>
+          </ul>
+        </li>
+      );
+    })}
+  </ul>
+);
 
 RepoGrid.propTypes = {
   repos: PropTypes.array.isRequried
 };
-
-module.exports = RepoGrid;
